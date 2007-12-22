@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+
+require 'pp'
+require 'tempfile'
+
+HELP=<<__
+usage: svn-ignore [+-] [-h|--help] path pattern...
+__
+
+add = true
+
+case (arg0 = ARGV.shift)
+when "-h", "--help"
+  puts HELP
+  exit 1
+
+when "+"
+
+when "-"
+  add = false
+
+else
+  ARGV.unshift arg0
+
+end
+
+if ARGV.length < 2
+  puts HELP
+  exit 1
+end
+
+#puts "add? #{add.inspect}: #{ARGV.join ', '}"
+
+path = ARGV.shift
+
+props = `svn --non-interactive propget svn:ignore '#{path}'`
+
+unless $?.success?
+  exit 1
+end
+
+props = props.split
+
+ARGV.each do |prop|
+  if add
+    props << prop
+  else
+    props.delete(prop)
+  end
+end
+
+props = props.sort.uniq
+
+t = Tempfile.new("_svn_ignore_")
+t.write(props.join("\n"))
+t.flush
+
+system("svn --non-interactive propset --file #{t.path} svn:ignore '#{path}'")
+
+
