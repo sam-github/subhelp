@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'pp'
+$-w = true
+
 require 'tempfile'
 
 HELP=<<__
