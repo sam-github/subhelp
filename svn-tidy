@@ -1,5 +1,76 @@
+#!/usr/bin/env ruby
 
+$-w = true
 
-delete anything in the subtree that matches a svn:ignore...
+require "find"
+require "optparse"
+require "ostruct"
 
+Options = OpenStruct.new
+
+Options.verbose = 1
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: svn-tidy [options] [...]"
+
+  opts.on("-x", "--execute <cmd>", "Execute cmd, 'rm -rf' might be useful.") do |c|
+    Options.cmd = c
+  end
+
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    if v
+      Options.verbose += 1
+    else
+      Options.verbose = 0
+    end
+  end
+
+end.parse!
+
+ARGV.each do |w|
+  Options.walk ||= []
+  Options.walk << w
+end
+
+unless Options.walk
+  Options.walk = [ "." ]
+end
+
+if Options.verbose > 1
+  p Options
+  p Cmd
+end
+
+def dump(path, files)
+  if path
+    files.each do |f|
+      _ = "#{path}/#{f}"
+      if Options.cmd
+	system("#{Options.cmd} #{_}")
+      else
+	puts _
+      end
+    end
+  end
+end
+
+IO.popen("svn --non-interactive --recursive propget svn:ignore #{Options.walk.join ' '}") do |io|
+  path = nil
+  files = []
+  while io.gets
+    $_.chomp!
+    next unless $_.length > 0
+
+    #p [$_.inspect, path, files]
+    case $_
+    when /^([^\s]+) - ([^\s]+)$/
+      dump(path, files)
+      path = $1
+      files = [ $2 ]
+    else
+      files << $_
+    end
+  end
+  dump(path, files)
+end
 
