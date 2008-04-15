@@ -4,7 +4,13 @@ require 'pp'
 require 'tempfile'
 
 HELP=<<__
-usage: svn-ignore [+-] [-h|--help] path pattern...
+usage: svn-ignore [+-] [-h|--help] path...
++ (add) is the default.
+
+paths can be specified on the command line, or on stdin
+
+paths specified on stdin can be in the form output by "svn stat":
+?  a/path/that/is/unknown
 __
 
 add = true
@@ -15,46 +21,68 @@ when "-h", "--help"
   exit 1
 
 when "+"
+  add = true
 
 when "-"
   add = false
+
+when nil
 
 else
   ARGV.unshift arg0
 
 end
 
-if ARGV.length < 2
+args = ARGV
+
+if args.empty? and not $stdin.tty?
+  args = $stdin.to_a.map do |path|
+    path.chomp!
+    # The first 6 columns all have defined possible values...
+    #   see "svn help stat"
+    if path =~ /^([ ACDIMRX?!~])[ CM] {5}(.*)/
+      if $1 == '?'
+	path = $2
+      else
+	path = nil
+      end
+    end
+    path
+  end
+end
+
+args.compact!
+
+if args.empty?
   puts HELP
   exit 1
 end
 
 #puts "add? #{add.inspect}: #{ARGV.join ', '}"
 
-path = ARGV.shift
+args.each do |path|
+  #puts "#{add ? '+' : '-'} #{path}"
 
-props = `svn --non-interactive propget svn:ignore '#{path}'`
+  dir  = File.dirname(path)
+  file = File.basename(path)
 
-unless $?.success?
-  exit 1
-end
+  props = `svn --non-interactive propget svn:ignore '#{dir}'`
 
-props = props.split
-
-ARGV.each do |prop|
-  if add
-    props << prop
-  else
-    props.delete(prop)
+  unless $?.success?
+    exit 1
   end
+
+  props = props.split
+
+  props.send(add ? :<< : :delete, file)
+
+  props = props.sort.uniq
+
+  t = Tempfile.new("_svn_ignore_")
+  t.write(props.join("\n"))
+  t.flush
+
+  system("svn --non-interactive propset --file #{t.path} svn:ignore '#{dir}'")
 end
-
-props = props.sort.uniq
-
-t = Tempfile.new("_svn_ignore_")
-t.write(props.join("\n"))
-t.flush
-
-system("svn --non-interactive propset --file #{t.path} svn:ignore '#{path}'")
 
 
