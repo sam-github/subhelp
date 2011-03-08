@@ -1,6 +1,4 @@
-#!/usr/bin/env ruby
-
-$-w = true
+#!/usr/bin/ruby -w
 
 require "find"
 require "optparse"
@@ -8,7 +6,7 @@ require "ostruct"
 
 Options = OpenStruct.new
 
-Options.verbose = 1
+Options.verbose = 0
 
 OptionParser.new do |opts|
   opts.banner = "Usage: svn-walk [options] [<command>]"
