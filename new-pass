@@ -1,0 +1,75 @@
+#!/usr/bin/ruby -w
+
+USAGE = <<__
+new-pass [-a] [-s] [#...]
+
+Choose a new password from the alphanumeric set (-a) or the symbolic
+set (-s, the default). # is the password length, it can be specified
+multiple times for multiple passwords.
+
+The arguments can be intermixed. No arguments is equivalent to -a 8.
+
+One byte from /dev/random is used to select one character from the
+set.
+
+Examples:
+
+% new-pass   
+I96Cm2OJ
+% new-pass 64 8 -a 8   
+ttzg!RQya(gN&W2$J,+5i{_f3]Qd^X+9^utI*wfO9xcappr]tGIK]ys:!wQ=,>=Q
+GefH>?1<
+J2xnNEtU
+__
+
+def p(*a) end
+
+unless ARGV.size > 0
+  ARGV.unshift "8"
+  ARGV.unshift "-a"
+end
+
+ALPHANUMERIC = [
+  ('a'..'z').to_a,
+  ('A'..'Z').to_a,
+  ('0'..'9').to_a,
+].flatten
+
+SYMBOLS = "~!@#\$%^&*()_+-={}[]|\:\";'<>,.?/"
+
+SYMBOLIC = [
+  ALPHANUMERIC,
+  SYMBOLS.split(//)
+].flatten
+
+raise unless SYMBOLIC.size == (ALPHANUMERIC.size + SYMBOLS.size)
+
+set = SYMBOLIC
+
+open "/dev/random" do |io|
+  ARGV.each do |arg|
+    case arg
+    when "-h"
+      puts USAGE
+      exit 1
+    when "-a"
+      set = ALPHANUMERIC
+    when "-s"
+      set = SYMBOLIC
+    else
+      pass = ""
+      arg.to_i.times do
+	b = io.read(1)
+	i = b.unpack("c").first
+	p [b, i]
+	c = set[i % set.size]
+	pass << c
+	p [b, i, c, pass]
+      end
+      puts pass
+    end
+  end
+end
+
+
+
