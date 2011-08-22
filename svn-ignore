@@ -38,9 +38,9 @@ args = ARGV
 if args.empty? and not $stdin.tty?
   args = $stdin.to_a.map do |path|
     path.chomp!
-    # The first 6 columns all have defined possible values...
+    # The first 6 or 7 (depending on svn version) columns all have defined possible values...
     #   see "svn help stat"
-    if path =~ /^([ ACDIMRX?!~])[ CM] {5}(.*)/
+    if path =~ /^([ ACDIMRX?!~])[ CM] +(.*)/
       if $1 == '?'
 	path = $2
       else
