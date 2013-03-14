@@ -1,0 +1,22 @@
+[user]
+	email = vieuxtech@gmail.com
+	name = Sam Roberts
+[clean]
+	requireForce = false
+[alias]
+	cl = clean -x
+	st = status
+	ci = commit
+	br = branch
+	b = branch -av
+	co = checkout
+	lg = log --stat --decorate
+	pick = cherry-pick
+[core]
+	excludesfile = ~/.gitignore
+[help]
+	autocorrect = -1
+[push]
+	default = upstream
+[color]
+	ui = true
