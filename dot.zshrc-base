@@ -1,0 +1,10 @@
+export PATH=".:$HOME/bin:$PATH"
+export PS1="%n@%m:%~ %# "
+
+alias v="vim"
+alias l="ls -l"
+alias ls="ls -F"
+alias recur=". ~/.current"
+
+. ./.current
+
