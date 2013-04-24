@@ -15,6 +15,7 @@
 	pick = cherry-pick
 [core]
 	excludesfile = ~/.gitignore
+	editor = /usr/local/bin/vim
 [help]
 	autocorrect = -1
 [push]
