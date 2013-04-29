@@ -1,0 +1,14 @@
+#!/usr/bin/ruby -w
+
+
+s = ARGV.shift
+b = ARGV.shift
+
+if b
+  n = s.to_i(b.to_i)
+else
+  n = Integer(s)
+end
+
+puts sprintf("%s is %d, %#x, %#o, %#b", s, n, n, n, n)
+
