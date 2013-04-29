@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -x
+
+set -e
+
+install=${1:-install}
+
+pkg=$(pwd | sed -es'_.*/__')
+rm -rf /tmp/stow-$pkg
+make $install DESTDIR=/tmp/stow-$pkg
+rm -rf /usr/local/stow/$pkg
+mv /tmp/stow-$pkg/usr/local /usr/local/stow/$pkg
+cd /usr/local/stow && stow -R $pkg
+
