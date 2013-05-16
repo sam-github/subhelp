@@ -3,8 +3,9 @@ export PS1="%n@%m:%~ %# "
 
 alias v="vim"
 alias l="ls -l"
-alias ls="ls -F"
+alias ls="ls -aF"
+alias la='ls -a'
 alias recur=". ~/.current"
 
-. ./.current
+. ~/.current
 
