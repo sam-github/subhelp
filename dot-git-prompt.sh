@@ -1,0 +1,1 @@
+/Users/sam/s/git/contrib/completion/git-prompt.sh

@@ -1,5 +1,16 @@
+source ~/.git-prompt.sh
+
+# * or + after branch
+GIT_PS1_SHOWDIRTYSTATE=y
+# $ after branch
+GIT_PS1_SHOWSTASHSTATE=y
+# % after branch
+GIT_PS1_SHOWUNTRACKEDFILES=y
+# 
+GIT_PS1_SHOWUPSTREAM=verbose
+
 export PATH=".:$HOME/bin:$PATH"
-export PS1="%n@%m:%~ %# "
+export PS1='%n@%m:%~ $(__git_ps1 " (%s)") %# '
 
 alias v="vim"
 alias l="ls -l"
@@ -8,4 +19,3 @@ alias la='ls -a'
 alias t=todo.sh
 alias recur=". ~/.current"
 alias realias=". $0"
-
