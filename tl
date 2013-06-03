@@ -1,4 +1,11 @@
 #!/bin/sh
 
-echo "`date "+%F %R"`: $*" >> ~/.gtimelog/timelog.txt
+T=~/.gtimelog/timelog.txt
+
+if [[ -z "$*" ]]
+then
+	tail $T
+else
+	echo "`date "+%F %R"`: $*" >> $T
+fi
 
