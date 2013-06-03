@@ -10,9 +10,10 @@
 	br = branch
 	b = branch -av
 	co = checkout
-	df = diff
+	df = diff --word-diff
 	lg = log --stat --decorate
 	pick = cherry-pick
+	tg = show-ref --tags
 [core]
 	excludesfile = ~/.gitignore
 	editor = /usr/local/bin/vim
