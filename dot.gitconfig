@@ -14,6 +14,7 @@
 	lg = log --stat --decorate
 	pick = cherry-pick
 	tg = show-ref --tags
+	tree = log --graph --oneline --decorate --simplify-by-decoration --branches
 [core]
 	excludesfile = ~/.gitignore
 	editor = /usr/local/bin/vim
