@@ -22,4 +22,4 @@ GIT_PS1_SHOWUNTRACKEDFILES=y
 # 
 GIT_PS1_SHOWUPSTREAM=verbose
 
-export PS1='%n@%m:%~ $(__git_ps1 " (%s)") %# '
+export PS1='%n@%m:%~$(__git_ps1 " (%s)") %# '
