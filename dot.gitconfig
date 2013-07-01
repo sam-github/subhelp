@@ -18,6 +18,7 @@
 	remotes = remote -v show
 [core]
 	excludesfile = ~/.gitignore
+	# os x/brew hack
 	editor = /usr/local/bin/vim
 [help]
 	autocorrect = -1
