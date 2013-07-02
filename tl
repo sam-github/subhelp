@@ -2,7 +2,7 @@
 
 T=~/.gtimelog/timelog.txt
 
-if [[ -z "$*" ]]
+if [ -z "$*" ]
 then
 	tail $T
 else
