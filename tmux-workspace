@@ -1,0 +1,7 @@
+#!/bin/sh
+
+where=${1:-$PWD}
+where=$(readlink -f $where)
+
+tmux new-window -c $where \; split-window -h -c $where \; split-window -v -c $where
+
