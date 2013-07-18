@@ -6,7 +6,7 @@ require "ostruct"
 
 Options = OpenStruct.new
 
-Options.verbose = 0
+Options.verbose = 1
 
 OptionParser.new do |opts|
   opts.banner = "Usage: git-walk [options] [<command>]"
@@ -16,6 +16,14 @@ OptionParser.new do |opts|
       Options.verbose += 1
     else
       Options.verbose = 0
+    end
+  end
+
+  opts.on("-q", "--[no-]quiet", "Run quiet") do |q|
+    if q
+      Options.verbose = 0
+    else
+      Options.verbose = 1
     end
   end
 
