@@ -2,8 +2,9 @@
 
 where=${1:-$PWD}
 where=$(readlink -f $where)
+name=${2:-$(basename $where)}
 
 mkdir -p $where
 
 tmux new-window -c $where \; split-window -h -c $where \; split-window -v -c $where
-
+tmux rename-window "$name"
