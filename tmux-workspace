@@ -3,5 +3,7 @@
 where=${1:-$PWD}
 where=$(readlink -f $where)
 
+mkdir -p $where
+
 tmux new-window -c $where \; split-window -h -c $where \; split-window -v -c $where
 
