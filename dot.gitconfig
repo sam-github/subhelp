@@ -5,6 +5,7 @@
 	requireForce = false
 [alias]
 	cl = clean -x
+	f = fetch --prune
 	st = status
 	ci = commit
 	fetch = fetch --prune
