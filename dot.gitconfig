@@ -4,20 +4,19 @@
 [clean]
 	requireForce = false
 [alias]
-	cl = clean -x
-	f = fetch --prune
-	st = status
-	ci = commit
-	fetch = fetch --prune
-	br = branch
 	b = branch -av
+	br = branch
+	ci = commit
+	cl = clean -x
 	co = checkout
 	df = diff --word-diff
+	f = fetch --prune
 	lg = log --stat --decorate
 	pick = cherry-pick
+	remotes = remote -v show
+	st = status
 	tg = show-ref --tags
 	tree = log --graph --oneline --decorate --simplify-by-decoration --branches
-	remotes = remote -v show
 [core]
 	excludesfile = ~/.gitignore
 	# os x/brew hack
