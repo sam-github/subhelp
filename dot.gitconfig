@@ -7,6 +7,7 @@
 	cl = clean -x
 	st = status
 	ci = commit
+	fetch = fetch --prune
 	br = branch
 	b = branch -av
 	co = checkout
