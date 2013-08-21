@@ -5,6 +5,7 @@ alias v="vim"
 alias l="ls -l"
 alias ls="ls -aF"
 alias la='ls -a'
+alias lo='libreoffice'
 alias t=todo.sh
 alias recur=". ~/.current"
 alias realias=". $0"
