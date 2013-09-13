@@ -33,7 +33,9 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-Cmd = ARGV
+STATUS = ["git", "status", "--short", "-b"]
+
+Cmd = ARGV.empty? ?  STATUS : ARGV
 
 unless Options.walk
   Options.walk = [ "." ]
@@ -67,7 +69,7 @@ Find.find(*Options.walk) do |path|
     system(*cmd)
 
     unless $?.success?
-      $stderr.write "cmd failed with #{$?} - #{cmd.inspect}"
+      $stderr.write "cmd failed with #{$?} - #{cmd.inspect}\n"
       exit 1
     end
   ensure
