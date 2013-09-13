@@ -9,14 +9,20 @@
 	ci = commit
 	cl = clean -x
 	co = checkout
-	df = diff --word-diff
 	f = fetch --prune
 	lg = log --stat --decorate
+	mff = merge --ff-only
+	p = pull --rebase
+	pff = pull --ff-only
 	pick = cherry-pick
+# why doesn't below work?
+	prune = !git-delete-merged-branches
 	remotes = remote -v show
+	s = status --short
 	st = status
 	tg = show-ref --tags
 	tree = log --graph --oneline --decorate --simplify-by-decoration --branches
+	wdiff = diff --word-diff
 [core]
 	excludesfile = ~/.gitignore
 	# os x/brew hack
