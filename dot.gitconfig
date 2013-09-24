@@ -7,8 +7,8 @@
 	b = branch -av
 	br = branch
 	ci = commit
-	cl = clean -x
 	co = checkout
+	dump = cat-file -p
 	f = fetch --prune
 	lg = log --stat --decorate
 	mff = merge --ff-only
@@ -22,6 +22,7 @@
 	st = status
 	tg = show-ref --tags
 	tree = log --graph --oneline --decorate --simplify-by-decoration --branches
+	type = cat-file -t
 	wdiff = diff --word-diff
 [core]
 	excludesfile = ~/.gitignore
