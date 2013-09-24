@@ -1,0 +1,3 @@
+#!/bin/sh
+
+nohup xfce4-terminal -x weechat-curses >/dev/null &
