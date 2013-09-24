@@ -31,6 +31,6 @@
 [help]
 	autocorrect = -1
 [push]
-	default = tracking
+	default = current
 [color]
 	ui = true
