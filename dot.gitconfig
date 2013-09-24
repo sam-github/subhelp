@@ -33,4 +33,5 @@
 [push]
 	default = current
 [color]
-	ui = true
+	interactive = auto
+	ui = auto
