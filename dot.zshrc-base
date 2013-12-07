@@ -9,6 +9,7 @@ alias lo='libreoffice'
 alias t=todo.sh
 alias recur=". ~/.current"
 alias realias=". $0"
+alias mocha='./node_modules/.bin/mocha'
 
 
 # Git prompt
