@@ -70,7 +70,9 @@ Find.find(*Options.walk) do |path|
 
     unless $?.success?
       $stderr.write "cmd failed with #{$?} - #{cmd.inspect}\n"
-      exit 1
+      unless $?.exited?
+        exit! 1
+      end
     end
   ensure
     Dir.chdir pwd
