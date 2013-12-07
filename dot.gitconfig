@@ -4,8 +4,8 @@
 [clean]
 	requireForce = false
 [alias]
-	b = branch -av
-	br = branch
+	b = branch -vv -a
+	br = branch -vv
 	ci = commit
 	co = checkout
 	dump = cat-file -p
