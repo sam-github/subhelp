@@ -9,7 +9,7 @@
 	ci = commit
 	co = checkout
 	dump = cat-file -p
-	f = fetch --prune
+	f = fetch --prune --all
 	lg = log --stat --decorate
 	mff = merge --ff-only
 	p = pull --rebase
