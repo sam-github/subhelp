@@ -15,8 +15,6 @@
 	p = pull --rebase
 	pff = pull --ff-only
 	pick = cherry-pick
-# why doesn't below work?
-	prune = !git-delete-merged-branches
 	remotes = remote -v show
 	s = status --short
 	st = status
