@@ -33,3 +33,5 @@
 [color]
 	interactive = auto
 	ui = auto
+[rerere]
+	enabled = true
