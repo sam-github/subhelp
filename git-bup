@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+set -v
+
+git fetch --prune --all
+git rebase origin/master
