@@ -1,0 +1,3 @@
+#!/bin/sh
+
+GIT_PAGER= git-walk -- git log --oneline origin/production..origin/master --no-merges
