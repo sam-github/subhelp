@@ -2,4 +2,4 @@
 
 set -e
 
-git ls-files $(git rev-parse --show-cdup) | entr -cr "$@"
+git ls-files $(git rev-parse --show-cdup) | entr -crx "$@"
