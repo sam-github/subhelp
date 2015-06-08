@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+where=~/w/core/next/node
+cd $where
+where=$PWD
+
+name=next
+
+tmux new-window -c $where \; split-window -h -c $where \; split-window -v -c $where
+tmux rename-window "$name"

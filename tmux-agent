@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+where=~/w/sn/strongops/agent
+cd $where
+where=$PWD
+
+name=strong-agent
+
+tmux new-window -c $where \; split-window -h -c $where \; split-window -v -c $where
+tmux rename-window "$name"
