@@ -15,6 +15,9 @@
 	p = pull --rebase
 	pff = pull --ff-only
 	pick = cherry-pick
+	rbc = rebase --continue
+	rba = rebase --abort
+	rbi = rebase -i origin/master
 	remotes = remote -v show
 	s = status --short
 	st = status
@@ -26,6 +29,7 @@
 	excludesfile = ~/.gitignore
 	# os x/brew hack
 	editor = /usr/local/bin/vim
+	whitespace = fix
 [help]
 	autocorrect = -1
 [push]
