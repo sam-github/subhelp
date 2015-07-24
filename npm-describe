@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+var basename = require('path').basename;
+var dirname = require('path').dirname;
+var exec = require('child_process').execFile;
+var resolve = require('path').resolve;
+
+try {
+  var p = resolve('package.json');
+  var n = require(p).name;
+  var v = require(p).version;
+} catch(er) {
+  console.log('? %s', basename(dirname(p)));
+  process.exit(0);
+}
+
+exec('git', ['describe'], function(er, stdout, stderr) {
+  if (er) {
+    console.log('X %s:%s (never published)', n, v);
+    process.exit(0);
+  }
+  if (/-g/.test(stdout))
+    console.log('P %s:%s (needs publish)', n, stdout.trim());
+  else
+    console.log('- %s:%s (current)', n, stdout.trim());
+});
