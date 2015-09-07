@@ -28,3 +28,6 @@ GIT_PS1_SHOWUPSTREAM=verbose
 # export PS1='%n@%m:%~$(__git_ps1 " (%s)") %# '
 export PS1='%2~$(__git_ps1 " (%s)") %# '
 export ALT_REPO='http://artifactory.strongloop.com:8081/artifactory/internal/'
+
+# Enable node repl history
+export NODE_REPL_HISTORY_FILE=~/.node-histfile
