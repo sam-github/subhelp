@@ -65,7 +65,9 @@ function follow(from, dir, done) {
 
   fs.readdir(where, function(err, dirs) {
     if (err) {
-      if (err.code !== 'ENOTDIR')
+      // Wasn't a directory: ENOTDIR
+      // Dangling symlink: ENOENT
+      if (err.code !== 'ENOTDIR' && err.code !== 'ENOENT')
         console.error('readdir failed: %s', err.message);
       return done();
     }
