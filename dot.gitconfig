@@ -5,6 +5,7 @@
 	requireForce = false
 [alias]
 	b = branch -vv -a
+	check-whitespace = !git diff-tree --check $(git hash-object -t tree /dev/null) HEAD
 	br = branch -vv
 	ci = commit
 	co = checkout
