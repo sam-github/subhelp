@@ -2,3 +2,5 @@ git-hf*
 hubflow-*
 arg0
 en
+node_modules
+npm-debug.log
