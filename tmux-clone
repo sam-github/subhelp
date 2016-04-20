@@ -1,0 +1,18 @@
+#!/bin/sh
+# tmux-clone URL [WHERE [NAME]]
+
+set -e
+
+url="$1"
+
+where=${2:-$PWD}
+mkdir -p $where
+cd $where
+where=$PWD
+
+git clone ${url:?"tmux-clone URL [WHERE [NAME]]"} $where
+
+name=${3:-$(basename $where)}
+
+tmux new-window -c $where \; split-window -h -c $where \; split-window -v -c $where
+tmux rename-window "$name"
