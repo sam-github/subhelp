@@ -1,0 +1,55 @@
+#!/bin/bash
+
+usage() {
+cat <<__
+usage: $0 organization [pattern]
+
+Clone repositories from a github organization, optionally that match a pattern.
+__
+exit 1
+}
+
+PATTERN=${2:-*}
+ORGANIZATION=${1}                               # the GitHub organization whose repos will be backed up
+GHBU_UNAME=${GHBU_UNAME-"sam-github"}           # the username of a GitHub account (to use with the GitHub API)
+# Pull from ~/.config/hub?
+# Save first time?
+GHBU_GITHOST=${GHBU_GITHOST-"github.com"}       # the GitHub hostname (see notes)
+GHBU_SILENT=${GHBU_SILENT-false}                # when `true`, only show error messages 
+GHBU_API=${GHBU_API-"https://api.github.com"}   # base URI for the GitHub API
+GHBU_GIT_CLONE_CMD="git clone --quiet git@${GHBU_GITHOST}:" # base command to use to clone GitHub repos
+
+[[ -z $ORGANIZATION ]] && usage
+
+echo "Clone ${ORGANIZATION}/${PATTERN}"
+
+# The function `check` will exit the script if the given command fails.
+function check {
+  "$@"
+  status=$?
+  if [ $status -ne 0 ]; then
+    echo "ERROR: Encountered error (${status}) while running the following:" >&2
+    echo "           $@"  >&2
+    echo "       (at line ${BASH_LINENO[0]} of file $0.)"  >&2
+    echo "       Aborting." >&2
+    exit $status
+  fi
+}
+
+REPOLIST=`check curl --silent -u $GHBU_UNAME ${GHBU_API}/orgs/${ORGANIZATION}/repos -q | check grep "\"name\"" | check awk -F': "' '{print $2}' | check sed -e 's/",//g'`
+
+for REPO in $REPOLIST; do
+  if [[ $REPO = $PATTERN ]]
+  then
+    if [[ -d $REPO ]]
+    then
+      echo "Skip existing ${ORGANIZATION}/${REPO}"
+    else
+      echo "Clone ${ORGANIZATION}/${REPO}"
+      ${GHBU_GIT_CLONE_CMD}${ORGANIZATION}/${REPO}
+    fi
+
+    #$GHBU_SILENT || echo "Backing up ${ORGANIZATION}/${REPO}.wiki (if any)"
+    #${GHBU_GIT_CLONE_CMD}${ORGANIZATION}/${REPO}.wiki.git 2>/dev/null
+  fi
+done
