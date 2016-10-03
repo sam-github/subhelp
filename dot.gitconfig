@@ -1,5 +1,5 @@
 [user]
-	email = sam@strongloop.com
+	email = vieuxtech@gmail.com
 	name = Sam Roberts
 [clean]
 	requireForce = false
@@ -19,6 +19,7 @@
 	rbc = rebase --continue
 	rba = rebase --abort
 	rbi = rebase -i origin/master
+	rbia = rebase -i origin/master --autosquash
 	remotes = remote -v show
 	s = status --short
 	st = status
