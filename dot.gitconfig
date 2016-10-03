@@ -29,8 +29,6 @@
 	wdiff = diff --word-diff
 [core]
 	excludesfile = ~/.gitignore
-	# os x/brew hack
-	editor = /usr/local/bin/vim
 	whitespace = fix
 [help]
 	autocorrect = -1
