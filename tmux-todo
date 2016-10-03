@@ -1,4 +1,7 @@
 #!/bin/sh
 
-tmux new-window -c ~/w -n TODO -kt 0 'vi time.txt' \; split-window -c ~/w \; select-layout main-vertical \; split-window -c ~/w  'vi todo.txt'
+  tmux new-window -c ~/w -n TODO -kt 0 'vi todo.txt' \;\
+    split-window -c ~/w \; select-layout main-vertical \;\
+    split-window -c ~/w  'vi rsam.wiki/Home.md'
+
 # tmux new-window -c ~/w -n TODO -kt 0 'vi time.txt' \; select-window -t :=0 \; split-window -c ~/w \; select-layout main-vertical \; split-window -c ~/w  'vi todo.txt'
