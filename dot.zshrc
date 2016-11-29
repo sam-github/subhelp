@@ -64,7 +64,7 @@ export OCI_INC_DIR=$OCI_HOME/sdk/include
 export OCI_INCLUDE_DIR=$OCI_INC_DIR
 
 ### nvm
-export NVM_DIR="/home/sam/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 ### current/local setup
