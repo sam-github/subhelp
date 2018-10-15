@@ -63,6 +63,10 @@ export OCI_LIB_DIR=$OCI_HOME
 export OCI_INC_DIR=$OCI_HOME/sdk/include
 export OCI_INCLUDE_DIR=$OCI_INC_DIR
 
+### go
+
+export PATH=$PATH:$(go env GOPATH)/bin
+
 ### nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
