@@ -5,19 +5,22 @@
 	requireForce = false
 [alias]
 	b = branch -vv -a
-	check-whitespace = !git diff-tree --check $(git hash-object -t tree /dev/null) HEAD
 	br = branch -vv
+	bup = !git fetch origin && git rebase origin/master
+	check-whitespace = !git diff-tree --check $(git hash-object -t tree /dev/null) HEAD
 	ci = commit
 	co = checkout
 	dump = cat-file -p
-	f = fetch --prune --all
+	f = fetch --prune --all --tags
 	lg = log --stat --decorate
 	mff = merge --ff-only
+	mup = !git fetch --prune --all && git checkout master && git pull --ff-only
 	p = pull --rebase
+	pf = push --force-with-lease
 	pff = pull --ff-only
 	pick = cherry-pick
-	rbc = rebase --continue
 	rba = rebase --abort
+	rbc = rebase --continue
 	rbi = rebase -i origin/master
 	rbia = rebase -i origin/master --autosquash
 	remotes = remote -v show
@@ -26,6 +29,10 @@
 	tg = show-ref --tags
 	tree = log --graph --oneline --decorate --simplify-by-decoration --branches
 	type = cat-file -t
+	ubup = !git fetch upstream && git rebase upstream/master
+	umup = !git fetch upstream && git checkout master && git pull --ff-only
+	urbi = !git fetch upstream && git rebase -i upstream/master
+	urbia = !git fetch upstream && git rebase -i upstream/master --autosquash
 	wdiff = diff --word-diff
 [core]
 	excludesfile = ~/.gitignore
@@ -39,3 +46,5 @@
 	ui = auto
 [rerere]
 	enabled = true
+[diff]
+	wsErrorHighlight = all
