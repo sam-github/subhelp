@@ -1,4 +1,8 @@
-.*.swp
 .*.swo
-tags
+.*.swp
+.ncu
+.ncurc
 T
+deps/openssl/openssl/test/*.c
+tags
+tools/eslint/node_modules
