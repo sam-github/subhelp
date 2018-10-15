@@ -16,7 +16,7 @@ unsetopt nomatch
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-export PATH=".:./node_modules/.bin:$HOME/bin:/usr/local/bin:$PATH"
+export PATH=".:./node_modules/.bin:/usr/lib/ccache:/usr/local/opt/ccache/libexec:$HOME/bin:/usr/local/bin:$PATH"
 export PS1='%n@%m:%~ %# '
 
 alias v="vim"
