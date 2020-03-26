@@ -5,6 +5,10 @@ set -x
 
 # --file-tags=yes   Same as --extra=+f  ?
 # --extra=+g   Unsupported?
-
-ctags --if0=yes --recurse --extra=+fq --fields=+i --c-kinds=+p --ruby-kinds=+cfFm --langmap=c:+.m "$@"
+# --fields=+iaS ?
+ctags --if0=yes --recurse --extra=+fq --fields=+i \
+  --c++-kinds=+p \
+  --c-kinds=+p \
+  --ruby-kinds=+cfFm \
+  --langmap=c:+.m "$@"
 
