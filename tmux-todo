@@ -1,8 +1,11 @@
 #!/bin/sh
 
   tmux new-window -c ~/w -n TODO -kt 0 'vi -o ~/todo.txt' \;\
-    split-window -c ~/w \; select-layout main-vertical \;\
-    split-window -c ~/w  'vi rsam.wiki/Home.md'
+    split-window -c ~/w \; select-layout even-horizontal \;\
+    split-window -c ~/w  'vi rsam.wiki/Home.md' \;\
+
+
+#   split-window -c ~/w  'vi ~/time.txt' \;\
 
 # tmux new-window -c ~/w -n TODO -kt 0 'vi -o sam.wiki/Node.md sam.wiki/Reading.md' \;\
 #   split-window -c ~/w \; select-layout main-vertical \;\
