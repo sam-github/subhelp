@@ -1,0 +1,117 @@
+#!/usr/bin/ruby -w
+
+require "date"
+
+# Present: P[DATE][MEMBER] = true
+P = Hash.new do |hash, date|
+  hash[date] = Hash.new
+end
+
+# Members: Copy from https://github.com/nodejs/node#tsc-technical-steering-committee
+M = %Q{
+* [addaleax](https://github.com/addaleax) -
+**Anna Henningsen** &lt;anna@addaleax.net&gt; (she/her)
+* [apapirovski](https://github.com/apapirovski) -
+**Anatoli Papirovski** &lt;apapirovski@mac.com&gt; (he/him)
+* [BethGriggs](https://github.com/BethGriggs) -
+**Beth Griggs** &lt;Bethany.Griggs@uk.ibm.com&gt; (she/her)
+* [ChALkeR](https://github.com/ChALkeR) -
+**Сковорода Никита Андреевич** &lt;chalkerx@gmail.com&gt; (he/him)
+* [cjihrig](https://github.com/cjihrig) -
+**Colin Ihrig** &lt;cjihrig@gmail.com&gt; (he/him)
+* [danbev](https://github.com/danbev) -
+**Daniel Bevenius** &lt;daniel.bevenius@gmail.com&gt; (he/him)
+* [fhinkel](https://github.com/fhinkel) -
+**Franziska Hinkelmann** &lt;franziska.hinkelmann@gmail.com&gt; (she/her)
+* [Fishrock123](https://github.com/Fishrock123) -
+**Jeremiah Senkpiel** &lt;fishrock123@rocketmail.com&gt;
+* [gabrielschulhof](https://github.com/gabrielschulhof) -
+**Gabriel Schulhof** &lt;gabriel.schulhof@intel.com&gt;
+* [gireeshpunathil](https://github.com/gireeshpunathil) -
+**Gireesh Punathil** &lt;gpunathi@in.ibm.com&gt; (he/him)
+* [jasnell](https://github.com/jasnell) -
+**James M Snell** &lt;jasnell@gmail.com&gt; (he/him)
+* [joyeecheung](https://github.com/joyeecheung) -
+**Joyee Cheung** &lt;joyeec9h3@gmail.com&gt; (she/her)
+* [mcollina](https://github.com/mcollina) -
+**Matteo Collina** &lt;matteo.collina@gmail.com&gt; (he/him)
+* [mhdawson](https://github.com/mhdawson) -
+**Michael Dawson** &lt;michael_dawson@ca.ibm.com&gt; (he/him)
+* [MylesBorins](https://github.com/MylesBorins) -
+**Myles Borins** &lt;myles.borins@gmail.com&gt; (he/him)
+* [sam-github](https://github.com/sam-github) -
+**Sam Roberts** &lt;vieuxtech@gmail.com&gt;
+* [targos](https://github.com/targos) -
+**Michaël Zasso** &lt;targos@protonmail.com&gt; (he/him)
+* [thefourtheye](https://github.com/thefourtheye) -
+**Sakthipriyan Vairamani** &lt;thechargingvolcano@gmail.com&gt; (he/him)
+* [tniessen](https://github.com/tniessen) -
+**Tobias Nießen** &lt;tniessen@tnie.de&gt;
+* [Trott](https://github.com/Trott) -
+**Rich Trott** &lt;rtrott@gmail.com&gt; (he/him)
+}.split(/\n/).select{|l| l=~ /^\* /}.map do |line|
+  line =~ /\[(.*)\]/
+  "@" + $1.downcase
+end
+
+ARGV.each do |meeting|
+  meeting =~ %r{.*/(\d{4}-\d{2}-\d{2}).md}
+
+  unless $1
+    next
+  end
+
+  date = Date.parse($1)
+
+  raise "no date in #{meeting}!" unless date
+
+  in_present = false
+  open(meeting, "r").each_line do |line|
+    case
+    when line =~ /^## Present/
+      in_present = true
+    when in_present
+      if line =~ /^#/
+        break
+      end
+      if line =~ /\* (.*) (@.*) \(TSC\)/
+        member = $2.downcase
+        P[date][member] = 1
+      end
+    end
+  end
+end
+
+M.sort!
+D = P.keys.sort.reverse
+
+def history(date, member)
+  d0 = date << 3
+  attended = 0
+  meetings = 0
+  D.each do |d| 
+    next if d < d0
+    next if d > date
+    attended += 1 if  P[d][member]
+    meetings += 1
+  end
+  ratio = (attended.to_f/meetings * 100).floor
+  eject = ratio < 25 ? " X" : "  "
+  "#{attended}/#{meetings} => #{sprintf("%.2d", ratio)}%#{eject}"
+end
+
+
+puts "# TSC Attendance"
+puts "> In the case where an individual TSC member -- within any three month"
+puts "> period -- attends fewer than 25% of the regularly scheduled meetings,"
+puts "> (...) the member shall be automatically removed from the TSC."
+puts ""
+
+D.each do |date|
+
+  puts "## Present: #{date}"
+  M.each do |member|
+    p = P[date][member] ? '(present)' : '(absent)'
+    puts "* #{history(date, member)} #{member} #{p}"
+  end
+end
