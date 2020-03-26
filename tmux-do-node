@@ -1,0 +1,6 @@
+#!/bin/sh
+
+tmux-workspace $HOME/w/core/node
+tmux-workspace $HOME/w/core/lts
+tmux-workspace $HOME/w/core/tls
+tmux-workspace $HOME/w/core/build
