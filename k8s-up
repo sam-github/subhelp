@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -e
+set -x
+sudo microk8s.start
+microk8s.config > ~/.kube/config

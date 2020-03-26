@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -x
+
+# Set state to "clean" and stop, so that the stop process is slow, but the
+# start process is fast.
+sudo microk8s.reset
+sudo microk8s.enable dns
+sudo microk8s.stop
