@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+git fetch --all --prune
+
+git switch master
+
+git for-each-ref --format '%(refname:strip=2) %(upstream:track)' refs/heads \
+  | fgrep '[gone]' \
+  | sed -e 's/ \[gone]$//' \
+  | xargs -n1 --no-run-if-empty git branch -D
+
+git pr clean
+
+git-delete-merged-branches -f

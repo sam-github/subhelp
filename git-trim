@@ -1,7 +1,0 @@
-#!/bin/sh
-
-set -e
-
-git fetch --prune
-
-exec git-delete-merged-branches -f
