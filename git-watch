@@ -2,4 +2,4 @@
 
 set -e
 
-git ls-files $(git rev-parse --show-cdup) | entr -crx "$@"
+git ls-files -z $(git rev-parse --show-cdup) | tr '\0' '\n' | grep -v test/__snapshots__ | entr -crx "$@"
