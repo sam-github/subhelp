@@ -9,5 +9,8 @@ where=$PWD
 
 name=${2:-$(basename $where)}
 
+export CCACHE_BASEDIR=$PWD
+export CCACHE_HASHDIR=
+
 tmux new-window -c "$where" \; split-window -h -c "$where" \; split-window -v -c "$where"
 tmux rename-window "$name"
