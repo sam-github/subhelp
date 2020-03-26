@@ -1,0 +1,18 @@
+#!/bin/sh
+
+. ~/.nvm/nvm.sh
+
+set -e
+
+nvm i 6 2>/dev/null >/dev/null
+node -p '`node ${process.version}: openssl ${process.versions.openssl}`'
+nvm i 8 2>/dev/null >/dev/null
+node -p '`node ${process.version}: openssl ${process.versions.openssl}`'
+nvm i 10 2>/dev/null >/dev/null
+node -p '`node ${process.version}: openssl ${process.versions.openssl}`'
+#nvm i 11 2>/dev/null >/dev/null
+#node -p '`node ${process.version}: openssl ${process.versions.openssl}`'
+nvm i 12 2>/dev/null >/dev/null
+node -p '`node ${process.version}: openssl ${process.versions.openssl}`'
+nvm i 13 2>/dev/null >/dev/null
+node -p '`node ${process.version}: openssl ${process.versions.openssl}`'

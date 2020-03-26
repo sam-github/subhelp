@@ -1,0 +1,22 @@
+#!/bin/sh
+
+. ~/.nvm/nvm.sh
+
+set -e
+
+nvm i 8 2>/dev/null >/dev/null
+node -p '`node ${process.version}: v8 ${process.versions.v8}`'
+nvm i 9 2>/dev/null >/dev/null
+node -p '`node ${process.version}: v8 ${process.versions.v8}`'
+nvm i 10.15.0 2>/dev/null >/dev/null
+node -p '`node ${process.version}: v8 ${process.versions.v8}`'
+nvm i 10.15.1 2>/dev/null >/dev/null
+node -p '`node ${process.version}: v8 ${process.versions.v8}`'
+nvm i 10.15.2 2>/dev/null >/dev/null
+node -p '`node ${process.version}: v8 ${process.versions.v8}`'
+nvm i 10.15.3 2>/dev/null >/dev/null
+node -p '`node ${process.version}: v8 ${process.versions.v8}`'
+nvm i 10 2>/dev/null >/dev/null
+node -p '`node ${process.version}: v8 ${process.versions.v8}`'
+nvm i 12 2>/dev/null >/dev/null
+node -p '`node ${process.version}: v8 ${process.versions.v8}`'

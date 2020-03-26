@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. ~/.nvm/nvm.sh
+
+set -e
+
+nvm i 10 2>/dev/null >/dev/null
+node -p '`node ${process.version}: npm ${process.versions.npm}`'; npm --version
+nvm i 12 2>/dev/null >/dev/null
+node -p '`node ${process.version}: npm ${process.versions.npm}`'; npm --version
+nvm i 13 2>/dev/null >/dev/null
+node -p '`node ${process.version}: npm ${process.versions.npm}`'; npm --version
+nvm i 14 2>/dev/null >/dev/null
+node -p '`node ${process.version}: npm ${process.versions.npm}`'; npm --version

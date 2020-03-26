@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -x
+set -e
+
+git f
+git push private upstream/master:master
+git push private upstream/v13.x:v13.x
+git push private upstream/v12.x:v12.x
+git push private upstream/v10.x:v10.x
