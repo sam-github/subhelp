@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+set -x
+
+docker system prune --all --volumes --force
+
+docker ps
+docker container ls
+docker image ls
+docker volume ls
