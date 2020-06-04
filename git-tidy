@@ -5,6 +5,7 @@ set -e
 git fetch --all --prune
 
 git switch master
+git pull --ff-only
 
 git for-each-ref --format '%(refname:strip=2) %(upstream:track)' refs/heads \
   | fgrep '[gone]' \

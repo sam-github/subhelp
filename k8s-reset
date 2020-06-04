@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -x
+
+microk8s.status && sudo microk8s.reset
+microk8s.status && sudo microk8s.enable dns
